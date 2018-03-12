@@ -1,0 +1,12 @@
+#! /usr/bin/env node
+'use strict'
+
+const minimist = require('minimist')
+const gitMs = require('../dist/index.js').default
+
+const argv = minimist(process.argv.slice(2))
+
+const { _ } = argv
+delete argv._
+
+gitMs(_, argv)

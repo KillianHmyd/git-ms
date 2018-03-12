@@ -1,0 +1,23 @@
+{
+  "presets": ["latest", "flow"],
+  "plugins": [
+    "syntax-flow",
+    "transform-object-rest-spread",
+    "transform-class-properties",
+    [
+      "transform-runtime",
+      {
+        "helpers": false,
+        "polyfill": false,
+        "regenerator": true,
+        "moduleName": "babel-runtime"
+      }
+    ],
+    [
+      "module-resolver",
+      {
+        "root": ["./src"]
+      }
+    ]
+  ]
+}
