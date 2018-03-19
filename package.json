@@ -49,8 +49,7 @@
     "eslint-plugin-react": "7.3.0",
     "flow-runtime": "0.16.0",
     "jest-cli": "21.1.0",
-    "pre-push": "0.1.1",
-    "semantic-release-gitlab": "4.0.17"
+    "semantic-release": "15.1.2"
   },
   "czConfig": {
     "path": "node_modules/cz-conventional-changelog"
