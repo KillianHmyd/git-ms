@@ -5,6 +5,7 @@ cd $DIR;
 
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse @{u})
+BASE=$(git merge-base @ @{u})
 
 if [ "$LOCAL" = "$REMOTE" ]; then
     STATUS="Up-to-date"
