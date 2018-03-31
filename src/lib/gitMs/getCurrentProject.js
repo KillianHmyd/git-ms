@@ -14,7 +14,7 @@ const getCurrentProject = async (): Promise<ProjectType> => {
   const session = await getSession()
 
   if (!session.currentProject) {
-    throw new Error('Use git-ms us <project name> before.')
+    throw new Error('Use git-ms use <project name> before.')
   }
 
   const currentProject = await getProject(session.currentProject.name)

@@ -26,34 +26,42 @@ const printMicroservices = async (projectName: string): Promise<*> => {
   let padEndStatus = 10
   let padEndUntracked = 0
 
-  const microservicesInfo = await Promise.all(
-    microservices.map((microservice: MicroserviceType): Promise<Object> => getMicroserviceInfo(projectName, microservice.name)),
-  )
-
-  microservicesInfo.forEach((microserviceInfo: Object) => {
-    const { path: pathString, name: nameString, branch: branchString, status: statusString, untracked: untrackedString } = microserviceInfo
-
-    padEndPath = Math.max(padEndPath, pathString.length + 5)
-    padEndName = Math.max(padEndName, nameString.length + 5)
-    padEndBranch = Math.max(padEndBranch, branchString.length + 5)
-    padEndStatus = Math.max(padEndStatus, statusString.length + 5)
-    padEndUntracked = Math.max(padEndUntracked, untrackedString.length + 5)
-
-    pathsToPrint.push(pathString)
-    namesToPrint.push(nameString)
-    branchesToPrint.push(branchString)
-    statusToPrint.push(statusString)
-    untrackedToPrint.push(untrackedString)
-  })
-
-  group.log(pathsToPrint
-    .map(
-      (el: string, index: number): string =>
-        `${pathsToPrint[index].padEnd(padEndPath)} ${namesToPrint[index].padEnd(padEndName)} ${branchesToPrint[index].padEnd(
-          padEndBranch,
-        )} ${statusToPrint[index].padEnd(padEndStatus)} ${untrackedToPrint[index].padEnd(padEndUntracked)}`,
+  try {
+    const microservicesInfo = await Promise.all(
+      microservices.map((microservice: MicroserviceType): Promise<Object> => getMicroserviceInfo(projectName, microservice.name)),
     )
-    .join('\n'))
+    microservicesInfo.forEach((microserviceInfo: Object) => {
+      const {
+        path: pathString,
+        name: nameString,
+        branch: branchString,
+        status: statusString,
+        untracked: untrackedString } = microserviceInfo
+
+      padEndPath = Math.max(padEndPath, pathString.length + 5)
+      padEndName = Math.max(padEndName, nameString.length + 5)
+      padEndBranch = Math.max(padEndBranch, branchString.length + 5)
+      padEndStatus = Math.max(padEndStatus, statusString.length + 5)
+      padEndUntracked = Math.max(padEndUntracked, untrackedString.length + 5)
+
+      pathsToPrint.push(pathString)
+      namesToPrint.push(nameString)
+      branchesToPrint.push(branchString)
+      statusToPrint.push(statusString)
+      untrackedToPrint.push(untrackedString)
+    })
+
+    group.log(pathsToPrint
+      .map(
+        (el: string, index: number): string =>
+          `${pathsToPrint[index].padEnd(padEndPath)} ${namesToPrint[index].padEnd(padEndName)} ${branchesToPrint[index].padEnd(
+            padEndBranch,
+          )} ${statusToPrint[index].padEnd(padEndStatus)} ${untrackedToPrint[index].padEnd(padEndUntracked)}`,
+      )
+      .join('\n'))
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export default printMicroservices
