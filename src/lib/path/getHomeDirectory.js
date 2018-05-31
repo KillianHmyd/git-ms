@@ -4,7 +4,7 @@
 
 import { execScript } from '../bash'
 
-const SCRIPT_PATH = `${__dirname}/bash/getHomeDirectory.sh`
+const SCRIPT_PATH = `${__dirname}/bashScripts/getHomeDirectory.sh`
 
 const getHomeDirectory = async (): Promise<string> => execScript(SCRIPT_PATH)
 
