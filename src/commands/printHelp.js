@@ -3,13 +3,17 @@
  */
 import { group } from '../lib/log'
 
-const nbIndentations = 5
-const indentation = '   '
+const columnNumber = 25
 
-const generateIndentations = (): string =>
-  [...Array(nbIndentations).keys()].reduce((previous: string): string => `${previous}${indentation}`, '')
+const generateIndentations = (title: string): string => {
+  const nbCharsToAdd = columnNumber - title.length
+  if (nbCharsToAdd <= 0) {
+    return `\n${new Array(columnNumber).join(' ')}`
+  }
+  return new Array(nbCharsToAdd).join(' ')
+}
 
-const formatLine = (title: string, description: string): string => `${title}${generateIndentations()}${description}`
+const formatLine = (title: string, description: string): string => `${title}${generateIndentations(title)}${description}`
 
 const printHelp = () => {
   group.begin()
@@ -97,7 +101,7 @@ const printHelp = () => {
   group.log(
     formatLine(
       'checkout <branch_name>',
-      'Checkotu every microservice on the given branch.',
+      'Checkout every microservice on the given branch.',
     ),
   )
   group.end()
