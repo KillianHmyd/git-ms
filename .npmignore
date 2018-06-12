@@ -9,5 +9,6 @@ src
 .gitignore
 .npmignore
 
-# Mist
+# Misc
 README.md
+.DS_Store
