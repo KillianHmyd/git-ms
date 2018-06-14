@@ -16,7 +16,7 @@ const addTag = async (projectName: string, tagName: string): Promise<void> => {
   }
 
   const existingTag = await getTag(projectName, tagName).catch((err: Error) => {
-    if (err.message !== `No tag ${tagName} found in project Wing`) {
+    if (err.message !== `No tag ${tagName} found in project ${projectName}`) {
       throw err
     }
   })
