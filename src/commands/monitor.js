@@ -183,15 +183,17 @@ const handleTagChoice = async (projectName, choosenTag, outputBox, tagBox) => {
   await loadRepoTable(projectName, outputBox)
   tagBox.hide()
   mainScreen.render()
+  pendingAction = false
 }
 
 const loadTagBox = tags => {
+  const tagsName = tags.map(tag => tag.name)
   const tagBox = grid.set(0, 10, 8, 2, blessed.list, {
     label: 'Actions',
     interactive: true,
     keys: true,
     vi: true,
-    items: tags,
+    items: tagsName,
     style: {
       selected: {
         bg: 'blue',
