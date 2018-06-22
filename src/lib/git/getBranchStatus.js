@@ -11,9 +11,9 @@ const handleNoUpstreamError = (error: Error): string => {
     return `${colors.red('No upstream')}`
   }
 
-  throw error
+  return `${colors.red('Unknown error')}`
 }
 
-const getCurrentBranch = async (path: string): Promise<string> => execScript(SCRIPT_PATH, path).catch(handleNoUpstreamError)
+const getCurrentBranch = async (path: string): Promise<string> => execScript(SCRIPT_PATH, path).catch((handleNoUpstreamError))
 
 export default getCurrentBranch
