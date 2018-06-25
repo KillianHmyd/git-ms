@@ -107,12 +107,40 @@ const loadActionBox = () => {
   return actionBox
 }
 
+/**
+ * Handle the search on lists. Show an input box to write the researched element.
+ * 
+ * @param {Function}  callback  Function called with the researched string.
+ */
+const handleSearch = async (parentComponent, callback) => {
+  const searchInputBox = grid.set(7, 10, 1, 2, blessed.textbox, {
+    label: 'Researched element',
+    keys: true,
+    inputOnFocus: true,
+  })
+
+  searchInputBox.on('cancel', () => {
+    searchInputBox.hide()
+    mainScreen.render()
+  })
+
+  searchInputBox.focus()
+  mainScreen.render()
+  searchInputBox.on('submit', researchedString => {
+    searchInputBox.hide()
+    parentComponent.focus()
+    callback(null, researchedString)
+    mainScreen.render()
+  })
+}
+
 const loadCheckoutBox = branches => {
   const checkoutBox = grid.set(0, 10, 8, 2, blessed.list, {
     label: 'Actions',
     interactive: true,
     keys: true,
     vi: true,
+    search: (callback) => handleSearch(checkoutBox, callback),
     items: branches,
     style: {
       selected: {
@@ -193,6 +221,7 @@ const loadTagBox = tags => {
     interactive: true,
     keys: true,
     vi: true,
+    search: (callback) => handleSearch(tagBox, callback),
     items: tagsName,
     style: {
       selected: {
