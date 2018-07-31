@@ -1,6 +1,6 @@
 {
   "name": "git-ms",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Manage your git microservices projects ",
   "main": "index.js",
   "bin": {
